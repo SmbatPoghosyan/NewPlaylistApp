@@ -41,8 +41,19 @@ app.post("/download", (req, res) =>
         let promArr = [];
         files.forEach(f =>
         {
-            let promise = downloadImage({name: f.name, url: f.url});
-            promArr.push(promise);
+            const path = Path.resolve(__dirname + "/public/", 'files', f.name);
+
+            if (!Fs.existsSync(path)) {
+                let promise = downloadImage({name: f.name, url: f.url});
+                promArr.push(promise);
+            } else {
+                const stats = Fs.statSync(path);
+                console.log(stats.size, f.size);
+                if(stats.size !== f.size) {
+                    let promise = downloadImage({name: f.name, url: f.url});
+                    promArr.push(promise);
+                }
+            }
         });
         Promise.all(promArr)
             .then(result =>
