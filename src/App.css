@@ -1,5 +1,11 @@
+@font-face {
+    font-family: 'Mardoto';
+    src: local('Mardoto'), url("./fonts/Mardoto/Mardoto-Regular.ttf") format('truetype');
+}
+
 .tickerContainer {
     position: absolute;
     bottom: 0;
     width: 100%;
+    font-family: Mardoto, serif;
 }

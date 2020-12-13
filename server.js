@@ -48,7 +48,6 @@ app.post("/download", (req, res) =>
                 promArr.push(promise);
             } else {
                 const stats = Fs.statSync(path);
-                console.log(stats.size, f.size);
                 if(stats.size !== f.size) {
                     let promise = downloadImage({name: f.name, url: f.url});
                     promArr.push(promise);
